@@ -1,0 +1,37 @@
+import { differences } from "../data";
+import Button from "./Button/Button";
+import React, { useState } from "react";
+
+export default function ButtonsSection() {
+  const [contentType, setContentType] = useState(null);
+
+  function handleClick(type) {
+    setContentType(type);
+  }
+  return (
+    <section>
+      <h3>Наши курсы</h3>
+      <Button
+        isActive={contentType === "way"}
+        onClick={() => handleClick("way")}
+      >
+        Подход
+      </Button>
+      <Button
+        isActive={contentType === "easy"}
+        onClick={() => handleClick("easy")}
+      >
+        Доступность
+      </Button>
+      <Button
+        isActive={contentType === "program"}
+        onClick={() => handleClick("program")}
+      >
+        Концентрация
+      </Button>
+
+      {!contentType && <p>Нажмите на кнопку, чтобы узнать больше</p>}
+      {contentType && <p>{differences[contentType]}</p>}
+    </section>
+  );
+}
